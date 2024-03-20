@@ -1,0 +1,30 @@
+org: aryans1319
+app: lystloc-task
+service: lystloc-task
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+
+parameters:
+  HUBSPOT_ACCESS_TOKEN:
+    description: Hubspot access token
+    type: string
+    default: 
+
+functions:
+  createLead:
+    handler: index.create_lead
+    events:
+      - httpApi:
+          path: /create_lead
+          method: post
+
+  getAllLeads:
+    handler: index.list_leads
+    events:
+      - httpApi:
+          path: /list_leads
+          method: get        
+
